@@ -67,7 +67,7 @@ public class XCarouselView extends RelativeLayout implements XViewPager.OnXPageC
         pointSpace = 10;
         bottomSpace = 10;
         xViewPager = new XViewPager(context);
-        xViewPager.setDuration(1500);
+        xViewPager.setScrollDuration(1500);
         xViewPager.setAutoScrollable(true);
         xViewPager.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
         xViewPager.setOnXPageChangeListener(this);

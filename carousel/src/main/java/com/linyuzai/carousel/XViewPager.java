@@ -29,6 +29,7 @@ public class XViewPager extends ViewPager {
 
     private boolean isHand;
     private boolean isAutoScrollable;
+    private int intervalDuration;
     private int currentPosition;
     private OnXPageChangeListener xPageChangeListener;
 
@@ -55,6 +56,7 @@ public class XViewPager extends ViewPager {
 
     protected void init(Context context) {
         addOnPageChangeListener(new OnPageChangeListenerImpl());
+        intervalDuration = 5000;
         autoDuration = 250;
         manualDuration = 250;
         xScroller = new XScroller(context);
@@ -72,9 +74,13 @@ public class XViewPager extends ViewPager {
         isAutoScrollable = autoScrollable;
     }
 
-    public void setDuration(int duration) {
+    public void setScrollDuration(int duration) {
         xScroller.setDuration(duration);
         autoDuration = duration;
+    }
+
+    public void setIntervalDuration(int duration) {
+        intervalDuration = duration;
     }
 
     public void setOnXPageChangeListener(OnXPageChangeListener listener) {
@@ -82,12 +88,10 @@ public class XViewPager extends ViewPager {
     }
 
     public void startPlay() {
-        isAutoScrollable = true;
-        handler.sendEmptyMessageDelayed(0, 5000);
+        handler.sendEmptyMessageDelayed(0, intervalDuration);
     }
 
     public void stopPlay() {
-        isAutoScrollable = false;
         handler.removeMessages(0);
     }
 
@@ -257,7 +261,7 @@ public class XViewPager extends ViewPager {
 
                 isHand = false;
                 if (isAutoScrollable)
-                    handler.sendEmptyMessageDelayed(0, 5000);
+                    handler.sendEmptyMessageDelayed(0, intervalDuration);
             }
             if (xPageChangeListener != null)
                 xPageChangeListener.onXPageScrollStateChanged(state);

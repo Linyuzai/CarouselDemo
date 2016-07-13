@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.ViewGroup;
 
 import com.linyuzai.carousel.XCarouselView;
+import com.linyuzai.carousel.XViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     XCarouselView xCarouselView;
+    XViewPager xViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +66,29 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCurrentPageSelected(int position) {
                 Log.e("select", position + "");
+            }
+        });
+
+        xViewPager = (XViewPager) findViewById(R.id.xvp);
+        assert xViewPager != null;
+        xViewPager.setAutoScrollable(true);
+        List<Fragment> list2 = new ArrayList<>();
+        for (int i = 0; i < 3; i++)
+            list2.add(new CFragment());
+        xViewPager.setAdapter(new XViewPager.XFragmentAdapter(getSupportFragmentManager(), list2) {
+            @Override
+            protected Fragment getFirstFragment(Bundle bundle) {
+                return new CFragment();
+            }
+
+            @Override
+            protected Fragment getLastFragment(Bundle bundle) {
+                return new CFragment();
+            }
+
+            @Override
+            protected void bindData(Fragment fragment, int position) {
+
             }
         });
     }
