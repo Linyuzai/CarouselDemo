@@ -175,9 +175,9 @@ public class XCarouselView extends RelativeLayout implements XViewPager.OnXPageC
             points.get(selectPoint).setImageDrawable(pointDefaultDrawable);
             points.get(position).setImageDrawable(pointSelectDrawable);
             selectPoint = position;
+            if (xPageChangeListener != null)
+                xPageChangeListener.onCurrentPageSelected(position);
         }
-        if (xPageChangeListener != null)
-            xPageChangeListener.onCurrentPageSelected(position);
     }
 
     public abstract static class XFragmentAdapter extends XViewPager.XFragmentAdapter {

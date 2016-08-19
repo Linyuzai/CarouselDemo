@@ -238,8 +238,14 @@ public class XViewPager extends ViewPager {
         public void onPageSelected(int position) {
             //   Log.e(TAG, "onPageSelected:" + position);
             currentPosition = position;
-            if (xPageChangeListener != null && position != 0 && position != totalCount - 1)
-                xPageChangeListener.onCurrentPageSelected(currentPosition - 1);
+            if (xPageChangeListener != null) {
+                if (position == 0)
+                    xPageChangeListener.onCurrentPageSelected(totalCount - 3);
+                else if (position == totalCount - 1)
+                    xPageChangeListener.onCurrentPageSelected(0);
+                else
+                    xPageChangeListener.onCurrentPageSelected(currentPosition - 1);
+            }
             if (xPageChangeListener != null)
                 xPageChangeListener.onXPageSelected(position);
         }

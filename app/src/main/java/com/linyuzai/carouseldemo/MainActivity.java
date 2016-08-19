@@ -69,6 +69,8 @@ public class MainActivity extends AppCompatActivity {
                 Log.e("select", position + "");
             }
         });
+        xCarouselView.startPlay();
+
 
         xViewPager = (XViewPager) findViewById(R.id.xvp);
         assert xViewPager != null;
