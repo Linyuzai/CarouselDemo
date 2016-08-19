@@ -31,6 +31,7 @@ public class XViewPager extends ViewPager {
     private boolean isAutoScrollable;
     private int intervalDuration;
     private int currentPosition;
+    private int totalCount;
     private OnXPageChangeListener xPageChangeListener;
 
     private Handler handler = new Handler() {
@@ -67,6 +68,7 @@ public class XViewPager extends ViewPager {
     public void setAdapter(PagerAdapter adapter) {
         super.setAdapter(adapter);
         setCurrentItem(1, false);
+        totalCount = adapter.getCount();
         handler.removeMessages(0);
     }
 
@@ -228,7 +230,6 @@ public class XViewPager extends ViewPager {
 
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            //    Log.e(TAG, "onPageScrolled:" + position);
             if (xPageChangeListener != null)
                 xPageChangeListener.onXPageScrolled(position, positionOffset, positionOffsetPixels);
         }
@@ -237,6 +238,8 @@ public class XViewPager extends ViewPager {
         public void onPageSelected(int position) {
             //   Log.e(TAG, "onPageSelected:" + position);
             currentPosition = position;
+            if (xPageChangeListener != null && position != 0 && position != totalCount - 1)
+                xPageChangeListener.onCurrentPageSelected(currentPosition - 1);
             if (xPageChangeListener != null)
                 xPageChangeListener.onXPageSelected(position);
         }
@@ -255,8 +258,8 @@ public class XViewPager extends ViewPager {
                     if (xPageChangeListener != null)
                         xPageChangeListener.onCurrentPageSelected(getAdapter().getCount() - 3);
                 } else {
-                    if (xPageChangeListener != null)
-                        xPageChangeListener.onCurrentPageSelected(currentPosition - 1);
+                    /*if (xPageChangeListener != null)
+                        xPageChangeListener.onCurrentPageSelected(currentPosition - 1);*/
                 }
 
                 isHand = false;

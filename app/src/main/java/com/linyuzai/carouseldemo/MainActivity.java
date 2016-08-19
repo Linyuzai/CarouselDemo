@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         xCarouselView.setPointSelectDrawable(getResources().getDrawable(R.mipmap.point_big));
         xCarouselView.setPointStyle(200, 5, 10);
         xCarouselView.setPageSavedLimit(3);
+        xCarouselView.setAutoScrollable(true);
         List<Fragment> list = new ArrayList<>();
         for (int i = 0; i < 3; i++)
             list.add(new CFragment());
@@ -46,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
             protected void bindData(Fragment fragment, int position) {
 
             }
-        }, R.id.xpv_id);
+        });
         xCarouselView.setOnXPageChangeListener(new XCarouselView.OnXPageChangeListener() {
             @Override
             public void onXPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

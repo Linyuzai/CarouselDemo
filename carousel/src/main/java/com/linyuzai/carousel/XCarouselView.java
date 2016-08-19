@@ -121,6 +121,10 @@ public class XCarouselView extends RelativeLayout implements XViewPager.OnXPageC
         redraw();
     }
 
+    public void setAdapter(PagerAdapter adapter) {
+        setAdapter(adapter, R.id.viewpager_id);
+    }
+
     public void redraw() {
         if (adapter == null)
             return;
