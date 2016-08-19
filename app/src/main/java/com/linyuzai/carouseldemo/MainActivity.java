@@ -30,16 +30,23 @@ public class MainActivity extends AppCompatActivity {
         xCarouselView.setPageSavedLimit(3);
         xCarouselView.setAutoScrollable(true);
         List<Fragment> list = new ArrayList<>();
-        for (int i = 0; i < 3; i++)
-            list.add(new CFragment());
+        for (int i = 0; i < 3; i++) {
+            CFragment cFragment = new CFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString("String", i + "");
+            cFragment.setArguments(bundle);
+            list.add(cFragment);
+        }
         xCarouselView.setAdapter(new XCarouselView.XFragmentAdapter(getSupportFragmentManager(), list) {
             @Override
-            protected Fragment getFirstFragment(Bundle bundle) {
+            protected Fragment getFirstFragment() {
+                Log.e("MainActivity", "getFirstFragment");
                 return new CFragment();
             }
 
             @Override
-            protected Fragment getLastFragment(Bundle bundle) {
+            protected Fragment getLastFragment() {
+                Log.e("MainActivity", "getLastFragment");
                 return new CFragment();
             }
 
@@ -80,12 +87,12 @@ public class MainActivity extends AppCompatActivity {
             list2.add(new CFragment());
         xViewPager.setAdapter(new XViewPager.XFragmentAdapter(getSupportFragmentManager(), list2) {
             @Override
-            protected Fragment getFirstFragment(Bundle bundle) {
+            protected Fragment getFirstFragment() {
                 return new CFragment();
             }
 
             @Override
-            protected Fragment getLastFragment(Bundle bundle) {
+            protected Fragment getLastFragment() {
                 return new CFragment();
             }
 

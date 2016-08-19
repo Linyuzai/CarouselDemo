@@ -153,8 +153,12 @@ public class XViewPager extends ViewPager {
 
         public XFragmentAdapter(FragmentManager fm, List<Fragment> fragments) {
             super(fm);
-            fragments.add(0, getLastFragment(fragments.get(fragments.size() - 1).getArguments()));
-            fragments.add(getFirstFragment(fragments.get(1).getArguments()));
+            Fragment firstFragment = getFirstFragment();
+            Fragment lastFragment = getLastFragment();
+            firstFragment.setArguments(fragments.get(0).getArguments());
+            lastFragment.setArguments(fragments.get(fragments.size() - 1).getArguments());
+            fragments.add(0, lastFragment);
+            fragments.add(firstFragment);
             this.fragments = fragments;
         }
 
@@ -175,9 +179,9 @@ public class XViewPager extends ViewPager {
             bindData(fragments.get(getCount() - 1), 0);
         }
 
-        protected abstract Fragment getFirstFragment(Bundle bundle);
+        protected abstract Fragment getFirstFragment();
 
-        protected abstract Fragment getLastFragment(Bundle bundle);
+        protected abstract Fragment getLastFragment();
 
         protected abstract void bindData(Fragment fragment, int position);
     }
