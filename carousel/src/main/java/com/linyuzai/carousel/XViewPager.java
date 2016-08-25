@@ -153,6 +153,7 @@ public class XViewPager extends ViewPager {
 
         public XFragmentAdapter(FragmentManager fm, List<Fragment> fragments) {
             super(fm);
+            fm.getFragments().clear();
             Fragment firstFragment = getFirstFragment();
             Fragment lastFragment = getLastFragment();
             firstFragment.setArguments(fragments.get(0).getArguments());
